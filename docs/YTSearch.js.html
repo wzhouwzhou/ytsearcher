@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: YTSearch.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: YTSearch.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+
+///////////////////////
+// Utility constants //
+///////////////////////
+
+const querystring = require( 'querystring' );
+const needle = require( 'needle' );
+const Constants = require ( '../deps/Constants');
+const { YTSearchPage } = require('./YTSearchPage');
+
+/**
+ * validOptions
+ * An Array containing the valid keys search options may have
+ *
+ * @type {Array}
+ */
+const validOptions = Constants.validOptions;
+/**
+ * apiurl
+ * A string representing Google's YouTube api url.
+ *
+ * @type {string}
+ */
+const apiurl = Constants.apiurl;
+
+////////////////////
+// YTSearch Class //
+////////////////////
+
+/**
+ *  YTSearch class
+ *  Represents a YouTube search result object that is returned by the YT Searcher
+ *
+ *  @type {YTSearch}
+ */
+const YTSearch = class YTSearch {
+
+  /**
+   * constructor - Creates a search object with a given query
+   *
+   * @param  {string}   query - The Search query
+   * @return {YTSearch}       - The YTSearch object
+   */
+  constructor ( query ) {
+    Object.defineProperty( this, 'query', {
+      value: query,
+    } );
+
+    Object.defineProperty( this, 'timestamp', {
+      value: Date.now(),
+    } );
+  }
+
+  /**
+   * search - Performs a search with given options.
+   *
+   * @memberof YTSearch
+   * @instance
+   * @param  {Object=} [options={}] - Optional search options
+   * @return {YTSearch}             - The YTSearch object populated with search results.
+   */
+  search ( options ) {
+    this.options = options||{};
+
+    return new Promise( (res, rej) => {
+
+      const searchParams = {
+        maxResults: this.options.maxResults || 10,
+        part: 'snippet',
+        q: this.query,
+        regionCode: this.options.regionCode||'US',
+        type: ( () => {
+          switch(!0){
+            case this.options.type == 'all' : return 'video,channel,playlist';
+            case typeof this.options.type == 'string' : return this.options.type;
+            case !0 : return 'video';
+          }
+        } )()
+      };
+
+      for(const option of Object.keys(this.options))
+        if (~validOptions.indexOf(k)) searchParams[option] = options[option];
+
+      const queryUrl = `${apiurl}${querystring.stringify(searchParams)}`;
+
+      needle.get( queryUrl, (error, response) => {
+        if(error) rej(err);
+        if(response.statusCode!=200) rej(`Error code: ${response.statusCode}`);
+        const body = response.body;
+        if(body.error) rej(body.error.message);
+
+        this.totalResults = body.pageInfo?body.pageInfo.totalResults:null;
+        this.pages = this.totalResults&amp;&amp;body.pageInfo.resultsPerPage?~~(this.totalResults/body.pageInfo.resultsPerPage)+1:null;
+
+        this.nextPageToken = body.nextPageToken;
+        this.prevPageToken = body.prevPageToken;
+
+        this.currentPage = new YTSearchPage(body.items);
+        this.first = currentPage.first();
+
+        res ( this );
+      } );
+    } );
+  }
+
+  /**
+   * nextPage - Updates the search object, populating it with data from the next page
+   *
+   * @memberof YTSearch
+   * @instance
+   * @method nextPage
+   * @param  {Object=} [newOptions=this.options] - New search options, if given. Defaults to last used search options.
+   * @return {YTSearch}                          - The Search result, or null if currentPage is already the last page.
+   */
+  nextPage ( newOptions = this.options ) {
+    return new Promise( async (res, rej) => {
+      if(!this.nextPageToken) res(null);
+
+      try{
+        res( await this.search(Object.assign({}, newOptions||this.options, {nextPageToken: this.nextPageToken})) );
+      }catch(err){
+        rej(err);
+      }
+    });
+  }
+
+  /**
+   * prevPage - Updates the search object, populating it with data from the next page
+   *
+   * @memberof YTSearch
+   * @instance
+   * @method prevPage
+   * @param  {Object=} [newOptions=this.options] - New search options, if given. Defaults to last used search options.
+   * @return {YTSearch}                          - The Search result, or null if currentPage is already the first page.
+   */
+  prevPage ( newOptions = {} ) {
+    return new Promise( async (res, rej) => {
+      if(!this.prevPageToken) res(null);
+
+      try{
+        res( await this.search(Object.assign({}, newOptions||this.options, {nextPageToken: this.prevPageToken})) );
+      }catch(err){
+        rej(err);
+      }
+    });
+  }
+};
+
+exports.YTSearch = YTSearch;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="YTSearch.html">YTSearch</a></li><li><a href="YTSearcher.html">YTSearcher</a></li><li><a href="YTSearchPage.html">YTSearchPage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#apiurl">apiurl</a></li><li><a href="global.html#validOptions">validOptions</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0</a> on Mon Jul 10 2017 16:19:51 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
