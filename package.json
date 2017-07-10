@@ -1,6 +1,6 @@
 {
   "name": "ytsearcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A nodejs package that provides an easy-to-use promise-based system of getting youtube search results",
   "main": "index.js",
   "directories": {

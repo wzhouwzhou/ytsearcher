@@ -33,6 +33,11 @@ A list of options is available [here](https://developers.google.com/youtube/v3/d
     // This will log the url of the first search result.
     console.log(result.first.url);
 
+    // A YTSearch has a built in page flipper.
+    result.nextPage();
+    result.prevPage();
+
+
 The Search Query can be anything, including a youtube link itself.
 
 Full docs are available here: [http://ytsearcher.willyz.cf](https://ytsearcher.willyz.cf)
