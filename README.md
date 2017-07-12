@@ -23,6 +23,9 @@ To enable access to `searcher.key` create the object like so:
 
 **To Perform Searches**
 
+This package interacts directly with google's api. The base url can be retrieved by doing
+```const { apiurl } = require('ytsearcher');```
+
     // result will be a YTSearch object.
     let resultA = await searcher.search('A Search Query');
 
@@ -30,6 +33,11 @@ To enable access to `searcher.key` create the object like so:
     let resultB = await searcher.search('Another Query', searchOptions)
 
 A list of options is available [here](https://developers.google.com/youtube/v3/docs/search/list)
+
+Or you can fetch the list via:
+```const { validOptions } = require('ytsearcher');``` which will return the array.
+
+**Examples**
 
     // For example, to grab only video results from a search query:
     let resultC = await searcher.search('A Third Query', { type: 'video' });
@@ -69,9 +77,9 @@ A list of options is available [here](https://developers.google.com/youtube/v3/d
     const { YTSearcher } = require( 'ytsearcher' );
     const ytsearcher = new YTSearcher( APIKEY );
 
-    const result = await ytsearcher.search( QUERY, { type: 'video' } );
+    const searchResult = await ytsearcher.search( QUERY, { type: 'video' } );
 
-    const secondPage = await result.nextPage();
+    const secondPage = await searchResult.nextPage();
     // secondPage is same object as searchResult
 
     const page = secondPage.currentPage;
