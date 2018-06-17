@@ -1,6 +1,7 @@
 <div align="center">
     <br />
     <p>
+        <a href="https://www.codacy.com/app/wzhouwzhou/ytsearcher?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wzhouwzhou/ytsearcher&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/1c131140d5974a798c4c2509df7bd452" alt="Codacy Badge" /></a>
         <a href="https://www.npmjs.com/package/ytsearcher"><img src="https://img.shields.io/npm/v/ytsearcher.svg" alt="NPM version" /></a>
         <a href="https://www.npmjs.com/package/ytsearcher"><img src="https://img.shields.io/npm/dt/ytsearcher.svg" alt="NPM downloads" /></a>
         <a href="https://david-dm.org/wzhouwzhou/ytsearcher"><img src="https://img.shields.io/david/wzhouwzhou/ytsearcher.svg" alt="Dependencies" /></a>

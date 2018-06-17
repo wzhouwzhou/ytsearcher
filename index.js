@@ -1,4 +1,3 @@
-
 ///////////////////////////////////////////////////////////////////////
 // ytsearcher by WillyZ (@wzhouwzhou/https://github.com/wzhouwzhou). //
 // Code Copyright 2017 William Zhou under the Apache License 2.0     //
@@ -14,5 +13,5 @@ module.exports = {
   YTSearcher,
   YTSearch,
   YTSearchPage,
-  validOptions
+  validOptions,
 };
