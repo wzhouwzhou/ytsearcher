@@ -1,6 +1,6 @@
 {
   "name": "ytsearcher",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A nodejs package that provides an easy-to-use promise-based system of getting youtube search results",
   "main": "index.js",
   "directories": {
@@ -8,6 +8,7 @@
     "lib": "lib"
   },
   "scripts": {
+    "gen-doc": "jsdoc -r --verbose -d ./docs -c ./conf.json -R ./README.md .;",
     "test": "node index.js"
   },
   "repository": {
@@ -15,8 +16,11 @@
     "url": "git+https://github.com/wzhouwzhou/ytsearcher.git"
   },
   "keywords": [
+    "Promise-Based",
     "YouTube",
-    "Searcher"
+    "Searcher",
+    "ytsearcher",
+    "Pagination"
   ],
   "author": "William Zhou",
   "license": "Apache-2.0",
@@ -25,7 +29,7 @@
   },
   "homepage": "https://wzhouwzhou.github.io/ytsearcher/",
   "dependencies": {
-    "needle": "^1.6.0",
-    "querystring": "^0.2.0"
+    "querystring": "^0.2.0",
+    "snekfetch": "^4.0.2"
   }
 }

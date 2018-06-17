@@ -1,3 +1,16 @@
+<div align="center">
+    <br />
+    <p>
+        <a href="https://www.npmjs.com/package/ytsearcher"><img src="https://img.shields.io/npm/v/ytsearcher.svg" alt="NPM version" /></a>
+        <a href="https://www.npmjs.com/package/ytsearcher"><img src="https://img.shields.io/npm/dt/ytsearcher.svg" alt="NPM downloads" /></a>
+        <a href="https://david-dm.org/wzhouwzhou/ytsearcher"><img src="https://img.shields.io/david/wzhouwzhou/ytsearcher.svg" alt="Dependencies" /></a>
+        <a href="https://paypal.me/wzhouwzhou"><img src="https://img.shields.io/badge/donate-paypal-009cde.svg" alt="Paypal" /></a>
+    </p>
+    <p>
+        <a href="https://nodei.co/npm/ytsearcher/"><img src="https://nodei.co/npm/ytsearcher.png?stars=true&downloads=true"></a>
+    </p>
+</div>
+
 # YTSearcher
 ## A nodejs package that provides an easy-to-use promise-based system of getting youtube search results.
 
@@ -16,10 +29,10 @@ For details on how to obtain an API key and create a project visit [this link](h
 By default the api key will be irretrievable.
 To enable access to `searcher.key` create the object like so:
 
-    const searcher2 = new YTSearcher( {
+    const searcher2 = new YTSearcher({
       key: apiKey,
       revealkey: true,
-    } );
+    });
 
 **To Perform Searches**
 
@@ -69,15 +82,18 @@ Or you can fetch the list via:
 
 ### Summary example to get the url of the second result on the second page of a video-only search (assuming both the page and the result exist):
 
-**For async methods:**
+**For async functions:**
+
+    (async () => {
 
     const APIKEY = "12345"; // replace me
-    const QUERY = "Anthing you want"; // replace me too
+    const QUERY = "Anything you want"; // replace me too
 
-    const { YTSearcher } = require( 'ytsearcher' );
-    const ytsearcher = new YTSearcher( APIKEY );
+    const { YTSearcher } = require('ytsearcher');
+    const ytsearcher = new YTSearcher(APIKEY);
 
-    const searchResult = await ytsearcher.search( QUERY, { type: 'video' } );
+    // Type can be 'all', 'video', 'channel', 'playlist', or comma separated combination such as 'video,channel'
+    const searchResult = await ytsearcher.search(QUERY, { type: 'video' });
 
     const secondPage = await searchResult.nextPage();
     // secondPage is same object as searchResult
@@ -85,27 +101,29 @@ Or you can fetch the list via:
     const page = secondPage.currentPage;
     const videoEntry = page[1];
 
-    console.log( videoEntry.url );
+    console.log(videoEntry.url);
 
-**For completely non-async methods:**
+    })();
+
+**For completely non-async functions:**
 
     const APIKEY = "12345"; // replace me
     const QUERY = "Anything you want"; // replace me too
 
-    const { YTSearcher } = require( 'ytsearcher' );
-    const ytsearcher = new YTSearcher( APIKEY );
+    const { YTSearcher } = require('ytsearcher');
+    const ytsearcher = new YTSearcher(APIKEY);
 
-    ytsearcher.search( QUERY, { type: 'video' } )
-    .then( searchResult => {
+    ytsearcher.search(QUERY, { type: 'video' })
+    .then(searchResult => {
 
       searchResult.nextPage()
-      .then( secondPage => {
+      .then(secondPage => {
         // secondPage is same object as searchResult
 
         const page = secondPage.currentPage;
         const videoEntry = page[1];
 
-        console.log( videoEntry.url );
+        console.log(videoEntry.url);
       });
     });
 

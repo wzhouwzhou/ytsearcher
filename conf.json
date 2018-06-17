@@ -1,0 +1,21 @@
+{
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "source": {
+        "includePattern": ".+\\.(js(doc)?)$",
+        "excludePattern": "((^|\\/|\\\\)_)|(\\.json$)",
+        "exclude": [
+            "node_modules",
+            "docs",
+            "examples"
+        ]
+    },
+    "templates": {
+        "cleverLinks": true,
+        "monospaceLinks": true,
+        "default": {
+            "outputSourceFiles": true
+        }
+    }
+}
