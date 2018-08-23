@@ -5,6 +5,7 @@
         <a href="https://www.npmjs.com/package/ytsearcher"><img src="https://img.shields.io/npm/v/ytsearcher.svg" alt="NPM version" /></a>
         <a href="https://www.npmjs.com/package/ytsearcher"><img src="https://img.shields.io/npm/dt/ytsearcher.svg" alt="NPM downloads" /></a>
         <a href="https://david-dm.org/wzhouwzhou/ytsearcher"><img src="https://img.shields.io/david/wzhouwzhou/ytsearcher.svg" alt="Dependencies" /></a>
+        <a href="https://snyk.io/test/npm/ytsearcher"><img src="https://snyk.io/test/npm/ytsearcher/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/npm/ytsearcher" style="max-width:100%;"></a>
         <a href="https://paypal.me/wzhouwzhou"><img src="https://img.shields.io/badge/donate-paypal-009cde.svg" alt="Paypal" /></a>
     </p>
     <p>
@@ -17,9 +18,16 @@
 
 ### Installing via NPM.
 
-```$ npm install ytsearcher```
+```$ npm install ytsearcher@1.2.0```
 
-### Quick Start Guide
+### Why ytsearcher?
+
+• Modern and trustworthy (promises, es6, up-to-date) with thousands of downloads.
+
+• Lightweight (packed size < 10kB) and NO other dependencies; this means **more productivity, less bloat**!
+
+### I'm all about that! How do I start searching YouTube the right way?
+
 **Creating the object:**
 
     const { YTSearcher } = require('ytsearcher');
@@ -133,3 +141,9 @@ The Search Query can be anything, including a youtube link itself.
 Searches may error, and if an error code is available it will be in the error. A list of possible errors responses is available here: [https://developers.google.com/analytics/devguides/reporting/core/v3/errors](https://developers.google.com/analytics/devguides/reporting/core/v3/errors)
 
 Full docs are available here: [http://ytsearcher.willyz.cf](https://ytsearcher.willyz.cf)
+
+Enjoy this package? Consider starring on [github](https://github.com/wzhouwzhou/ytsearcher) and checking out some of my other work:
+
+[Fluent Filepaths](https://npmjs.com/easypathutil)
+
+[Urban Dictionary](https://npmjs.com/easyurban)

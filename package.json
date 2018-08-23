@@ -16,11 +16,13 @@
     "url": "git+https://github.com/wzhouwzhou/ytsearcher.git"
   },
   "keywords": [
-    "Promise-Based",
     "YouTube",
     "Searcher",
     "ytsearcher",
-    "Pagination"
+    "Pagination",
+    "Promise",
+    "modern",
+    "es6"
   ],
   "author": "William Zhou",
   "license": "Apache-2.0",
@@ -28,8 +30,5 @@
     "url": "https://github.com/wzhouwzhou/ytsearcher/issues"
   },
   "homepage": "https://wzhouwzhou.github.io/ytsearcher/",
-  "dependencies": {
-    "querystring": "^0.2.0",
-    "snekfetch": "^4.0.2"
-  }
+  "dependencies": {}
 }
