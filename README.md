@@ -18,7 +18,7 @@
 
 ### Installing via NPM.
 
-```$ npm install ytsearcher@1.2.0```
+```$ npm install ytsearcher@1.2.1```
 
 ### Why ytsearcher?
 
@@ -147,3 +147,7 @@ Enjoy this package? Consider starring on [github](https://github.com/wzhouwzhou/
 [Fluent Filepaths](https://npmjs.com/easypathutil)
 
 [Urban Dictionary](https://npmjs.com/easyurban)
+
+Need support? Send me an email at wzhouwzhou@gmail.com, or connect with me on Discord at https://discord.gg/jj5FzF7 (William Zhou#0001)
+
+Like what you're seeing? Consider helping to fund my education through https://paypal.me/wzhouwzhou  
