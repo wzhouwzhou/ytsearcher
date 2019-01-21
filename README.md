@@ -18,7 +18,7 @@
 
 ### Installing via NPM.
 
-```$ npm install ytsearcher@1.2.1```
+```$ npm install ytsearcher@1.2.2```
 
 ### Why ytsearcher?
 
@@ -140,6 +140,10 @@ Or you can fetch the list via:
 The Search Query can be anything, including a youtube link itself.
 
 Searches may error, and if an error code is available it will be in the error. A list of possible errors responses is available here: [https://developers.google.com/analytics/devguides/reporting/core/v3/errors](https://developers.google.com/analytics/devguides/reporting/core/v3/errors)
+
+Version:
+
+    const version = require('ytsearcher').version;
 
 Full docs are available here: [http://ytsearcher.willyz.cf](https://ytsearcher.willyz.cf)
 

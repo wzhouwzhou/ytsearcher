@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////
-// ytsearcher by WillyZ (@wzhouwzhou/https://github.com/wzhouwzhou). //
-// Code Copyright 2017 William Zhou under the Apache License 2.0     //
+// ytsearcher by (@wzhouwzhou/https://github.com/wzhouwzhou).        //
+// Code ©2017-Present William Zhou under the Apache License 2.0      //
 ///////////////////////////////////////////////////////////////////////
 
 const { YTSearcher } = require('./lib/struct/YTSearcher');
@@ -14,4 +14,5 @@ module.exports = {
   YTSearch,
   YTSearchPage,
   validOptions,
+  version: require('./package.json').version,
 };
