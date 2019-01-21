@@ -18,13 +18,13 @@
 
 ### Installing via NPM.
 
-```$ npm install ytsearcher@1.2.1```
+```$ npm install ytsearcher@1.2.2```
 
 ### Why ytsearcher?
 
 • Modern and trustworthy (promises, es6, up-to-date) with thousands of downloads.
 
-• Lightweight (packed size < 10kB) and NO other dependencies; this means **more productivity, less bloat**!
+• Lightweight (packed size ~10kB) and NO other dependencies; this means **more productivity, less bloat**!
 
 ### I'm all about that! How do I start searching YouTube the right way?
 
@@ -33,6 +33,7 @@
     const { YTSearcher } = require('ytsearcher');
     const searcher = new YTSearcher(apikey);
 
+It's a good idea to get a key due to Google's rate limit on the API.
 For details on how to obtain an API key and create a project visit [this link](https://developers.google.com/youtube/v3/getting-started)
 
 By default the api key will be irretrievable.
@@ -139,6 +140,10 @@ Or you can fetch the list via:
 The Search Query can be anything, including a youtube link itself.
 
 Searches may error, and if an error code is available it will be in the error. A list of possible errors responses is available here: [https://developers.google.com/analytics/devguides/reporting/core/v3/errors](https://developers.google.com/analytics/devguides/reporting/core/v3/errors)
+
+Version:
+
+    const version = require('ytsearcher').version;
 
 Full docs are available here: [http://ytsearcher.willyz.cf](https://ytsearcher.willyz.cf)
 
