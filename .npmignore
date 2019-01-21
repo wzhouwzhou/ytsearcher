@@ -1,3 +1,5 @@
 docs
 .eslintrc.json
 conf.json
+.idea
+test.js

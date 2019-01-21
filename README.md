@@ -24,7 +24,7 @@
 
 • Modern and trustworthy (promises, es6, up-to-date) with thousands of downloads.
 
-• Lightweight (packed size < 10kB) and NO other dependencies; this means **more productivity, less bloat**!
+• Lightweight (packed size ~10kB) and NO other dependencies; this means **more productivity, less bloat**!
 
 ### I'm all about that! How do I start searching YouTube the right way?
 
@@ -33,6 +33,7 @@
     const { YTSearcher } = require('ytsearcher');
     const searcher = new YTSearcher(apikey);
 
+It's a good idea to get a key due to Google's rate limit on the API.
 For details on how to obtain an API key and create a project visit [this link](https://developers.google.com/youtube/v3/getting-started)
 
 By default the api key will be irretrievable.
