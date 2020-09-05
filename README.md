@@ -19,7 +19,7 @@
 
 ### Installing via NPM.
 
-```$ npm install ytsearcher@1.2.2```
+```$ npm i ytsearcher@1.2.3```
 
 ### Why ytsearcher?
 
@@ -34,10 +34,12 @@
     const { YTSearcher } = require('ytsearcher');
     const searcher = new YTSearcher(apikey);
 
+Notice the { } around YTSearcher. That is intentional!
+
 It's a good idea to get a key due to Google's rate limit on the API.
 For details on how to obtain an API key and create a project visit [this link](https://developers.google.com/youtube/v3/getting-started)
 
-By default the api key will be irretrievable.
+By default the api key will be irretrievable. This should be fine for most situations.
 To enable access to `searcher.key` create the object like so:
 
     const searcher2 = new YTSearcher({

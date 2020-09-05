@@ -9,7 +9,7 @@ You should always check here before reporting vulnerabilities.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.2.2   | :white_check_mark: |
+| >=1.2.2 | :white_check_mark: |
 | 1.2.1   | :x:                |
 | <=1.2.0 | :x:                |
 
