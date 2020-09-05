@@ -3,3 +3,5 @@ docs
 conf.json
 .idea
 test.js
+.github/
+SECURITY.md
