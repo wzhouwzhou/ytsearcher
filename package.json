@@ -31,5 +31,6 @@
     "url": "https://github.com/wzhouwzhou/ytsearcher/issues"
   },
   "homepage": "https://wzhouwzhou.github.io/ytsearcher/",
+  "funding": "https://github.com/wzhouwzhou/ytsearcher?sponsor=1",
   "dependencies": {}
 }
