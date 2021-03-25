@@ -3,6 +3,7 @@
   "version": "1.2.3",
   "description": "A nodejs package that provides an easy-to-use promise-based system of getting youtube search results",
   "main": "index.js",
+  "types": "index.d.ts",
   "directories": {
     "doc": "docs",
     "lib": "lib"
