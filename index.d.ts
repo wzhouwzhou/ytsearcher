@@ -1,15 +1,55 @@
 export const version: number;
 export const validOptions: string[];
 
-export type Options = Record<string, unknown>;
 export type ResultType = 'youtube#video' | 'youtube#channel' | 'youtube#playlist';
+
+interface SearchOptions {
+  part?: string;
+  forContentOwner?: boolean;
+  forDeveloper?: boolean;
+  forMine?: boolean;
+  relatedToVideoId?: string;
+  channelId?: string;
+  channelType?: 'any' | 'show';
+  eventType?: 'completed' | 'live' | 'upcoming';
+  fields?: string;
+  location?: string;
+  locationRadius?: string;
+  maxResults?: number;
+  onBehalfOfContentOwner?: string;
+  order?:
+    | 'date' 
+    | 'rating'
+    | 'relevance' 
+    | 'title' 
+    | 'videoCount' 
+    | 'viewCount';
+  pageToken?: string;
+  publishedAfter?: string;
+  publishedBefore?: string;
+  q?: string;
+  regionCode?: string;
+  relevanceLanguage?: string;
+  safeSearch?: 'moderate' | 'none' | 'strict';
+  topicId?: string;
+  type?: 'channel' | 'playlist' | 'video';
+  videoCaption?: 'any' | 'closedCaption' | 'none';
+  videoCategoryId?: string;
+  videoDefinition?: 'any' | 'high' | 'standard';
+  videoDimension?: '2d' | '3d' | 'any';
+  videoDuration?: 'any' | 'long' | 'medium' | 'short';
+  videoEmbeddable?: 'any' | 'true';
+  videoLicense?: 'any' | 'creativeCommon' | 'youtube';
+  videoSyndicated?: 'any' | 'true';
+  videoType?: 'any' | 'episode' | 'movie';
+}
 
 export interface KeyData {
   key: string;
   revealKey?: string;
 }
 
-export interface VideoEntry extends ResultSnippet {
+export interface VideoEntry extends Omit<ResultSnippet, 'publishedAt'> {
   kind: ResultType;
   id: string;
   url: string;
@@ -34,7 +74,7 @@ export interface ResultID {
 }
 
 export interface ResultSnippet {
-  publishedAt: number;
+  publishedAt: string;
   channelId: string;
   title: string;
   description: string;
@@ -48,34 +88,35 @@ export interface SearchResult {
   etag: string;
   id: ResultID;
   snippet: ResultSnippet;
-  id: ResultID;
 }
 
 export class YTSearch {
-  public options?: Options;
+  public options?: SearchOptions;
   public timestamp: number;
-
-  public constructor(public query: string);
-
-  public search(options?: Record<string, unknown>, apiKey?: KeyData): Promise<this>;
-  public newPage(newOptions?: Options): Promise<null | this>;
-  public prevPage(newOptions?: Options): Promise<null | this>;
-}
-
-export class YTSearcher {
-  public totalResult?: number | null;
+  public query: string;
+  public totalResults?: number | null;
   public pages?: number | null;
   public nextPageToken?: string;
   public prevPageToken?: string;
   public currentPage?: YTSearchPage;
-  public first?: Video;
 
-  public constructor(apiKey: string | KeyData, public defaultoptions?: Options);
+  public constructor(query: string);
+
+  public search(options?: SearchOptions, apiKey?: KeyData): Promise<this>;
+  public nextPage(newOptions?: SearchOptions): Promise<null | this>;
+  public prevPage(newOptions?: SearchOptions): Promise<null | this>;
+}
+
+export class YTSearcher {
+  public defaultoptions?: SearchOptions;
+  public first?: VideoEntry;
+
+  public constructor(apiKey: string | KeyData, defaultoptions?: SearchOptions);
 
   public set key(newKey: string);
   public get key(): undefined | string;
 
-  public search(query: string, options?: Options): YTSearch;
+  public search(query: string, options?: SearchOptions): YTSearch;
 }
 
 export class YTSearchPage extends Array<VideoEntry> {
