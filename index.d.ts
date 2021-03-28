@@ -3,7 +3,7 @@ export const validOptions: string[];
 
 export type ResultType = 'youtube#video' | 'youtube#channel' | 'youtube#playlist';
 
-interface SearchOptions {
+export interface SearchOptions {
   part?: string;
   forContentOwner?: boolean;
   forDeveloper?: boolean;
