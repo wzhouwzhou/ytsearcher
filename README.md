@@ -19,11 +19,11 @@
 
 ### Installing via NPM.
 
-```$ npm i ytsearcher@1.2.3```
+```$ npm i ytsearcher@latest```
 
 ### Why ytsearcher?
 
-• Modern and trustworthy (promises, es6, up-to-date) with thousands of downloads.
+• Modern and trustworthy (typings(!), promises, es6, up-to-date) with thousands of downloads.
 
 • Lightweight (minified + gzip ~2.5kB) and NO other dependencies; this means **more productivity, less bloat**!
 
