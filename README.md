@@ -19,7 +19,7 @@
 
 ### Installing via NPM.
 
-```$ npm i ytsearcher@1.2.4```
+```$ npm i ytsearcher@latest```
 
 ### Why ytsearcher?
 
