@@ -19,7 +19,9 @@
 
 ### Installing via NPM.
 
-```$ npm i ytsearcher@latest```
+```
+$ npm i ytsearcher@latest
+```
 
 ### Why ytsearcher?
 
@@ -30,10 +32,10 @@
 ### I'm all about that! How do I start searching YouTube the right way?
 
 **Creating the object:**
-
+```js
     const { YTSearcher } = require('ytsearcher');
     const searcher = new YTSearcher(apikey);
-
+```
 Notice the { } around YTSearcher. That is intentional!
 
 It's a good idea to get a key due to Google's rate limit on the API.
@@ -41,30 +43,34 @@ For details on how to obtain an API key and create a project visit [this link](h
 
 By default the api key will be irretrievable. This should be fine for most situations.
 To enable access to `searcher.key` create the object like so:
-
+```js
     const searcher2 = new YTSearcher({
       key: apiKey,
       revealkey: true,
     });
-
+```
 **To Perform Searches**
 
 This package interacts directly with google's api. The base url can be retrieved by doing
-```const { apiurl } = require('ytsearcher');```
+```js
+const { apiurl } = require('ytsearcher');
 
     // result will be a YTSearch object.
     let resultA = await searcher.search('A Search Query');
 
     // You can customize your search with like so:
     let resultB = await searcher.search('Another Query', searchOptions)
-
+```
 A list of options is available [here](https://developers.google.com/youtube/v3/docs/search/list)
 
 Or you can fetch the list via:
-```const { validOptions } = require('ytsearcher');``` which will return the array.
+```js
+const { validOptions } = require('ytsearcher');
+```
+which will return the array.
 
 **Examples**
-
+```js
     // For example, to grab only video results from a search query:
     let resultC = await searcher.search('A Third Query', { type: 'video' });
 
@@ -73,11 +79,11 @@ Or you can fetch the list via:
 
     // This will log the url of the first search result (in the active page).
     console.log(result.first.url);
-
+```
 ### Pagination
 
 **A YTSearch has a built in page flipper, which will update the properties of YTSearch, including search.first.**
-
+```js
     // These will return null when the last and first page have been hit (respectively).
     await result.nextPage();
     await result.prevPage();
@@ -92,11 +98,11 @@ Or you can fetch the list via:
     console.log(currentPage.first());
     console.log(currentPage.last());
     console.log(currentPage[1]);
-
+```
 ### Summary example to get the url of the second result on the second page of a video-only search (assuming both the page and the result exist):
 
 **For async functions:**
-
+```js
     (async () => {
 
     const APIKEY = "12345"; // replace me
@@ -117,9 +123,9 @@ Or you can fetch the list via:
     console.log(videoEntry.url);
 
     })();
-
+```
 **For completely non-async functions:**
-
+```js
     const APIKEY = "12345"; // replace me
     const QUERY = "Anything you want"; // replace me too
 
@@ -139,15 +145,15 @@ Or you can fetch the list via:
         console.log(videoEntry.url);
       });
     });
-
+```
 The Search Query can be anything, including a youtube link itself.
 
 Searches may error, and if an error code is available it will be in the error. A list of possible errors responses is available here: [https://developers.google.com/analytics/devguides/reporting/core/v3/errors](https://developers.google.com/analytics/devguides/reporting/core/v3/errors)
 
 Version:
-
+```js
     const version = require('ytsearcher').version;
-
+```
 Full docs are available here: [http://ytsearcher.willyz.cf](https://ytsearcher.willyz.cf)
 
 Enjoy this package? Consider starring on [github](https://github.com/wzhouwzhou/ytsearcher) and checking out some of my other work:
