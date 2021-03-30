@@ -132,17 +132,16 @@ const QUERY = "Anything you want"; // replace me too
 const { YTSearcher } = require('ytsearcher');
 const ytsearcher = new YTSearcher(APIKEY);
 
-ytsearcher.search(QUERY, { type: 'video' })
-  .then(searchResult => {
-    searchResult.nextPage()
-      .then(secondPage => {
-        // secondPage is same object as searchResult
+ytsearcher.search(QUERY, { type: 'video' }).then(searchResult => {
+  searchResult.nextPage()
+    .then(secondPage => {
+      // secondPage is same object as searchResult
 
-        const page = secondPage.currentPage;
-        const videoEntry = page[1];
+      const page = secondPage.currentPage;
+      const videoEntry = page[1];
 
-        console.log(videoEntry.url);
-    });
+      console.log(videoEntry.url);
+  });
 });
 ```
 The Search Query can be anything, including a youtube link itself.
