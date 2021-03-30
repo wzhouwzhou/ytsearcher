@@ -6,7 +6,7 @@
         <a href="https://www.npmjs.com/package/ytsearcher"><img src="https://img.shields.io/npm/dt/ytsearcher.svg" alt="NPM downloads" /></a>
         <a href="https://david-dm.org/wzhouwzhou/ytsearcher"><img src="https://img.shields.io/david/wzhouwzhou/ytsearcher.svg" alt="Dependencies" /></a>
         <a href="https://snyk.io/test/npm/ytsearcher"><img src="https://snyk.io/test/npm/ytsearcher/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/npm/ytsearcher" style="max-width:100%;"></a>
-        <a href="https://bundlephobia.com/result?p=ytsearcher"><img src="https://badgen.net/bundlephobia/minzip/ytsearcher" alt="BundlePhobia" /></a>
+        <a href="https://bundlephobia.com/result?p=ytsearcher"><img src="https://badgen.net/bundlephobia/minzip/ytsearcher@latest" alt="BundlePhobia" /></a>
         <a href="https://paypal.me/wzhouwzhou"><img src="https://img.shields.io/badge/donate-paypal-009cde.svg" alt="Paypal" /></a>
     </p>
     <p>
@@ -27,7 +27,7 @@ $ npm i ytsearcher@latest
 
 • Modern and trustworthy (typings(!), promises, es6, up-to-date) with thousands of downloads.
 
-• Lightweight (minified + gzip ~2.5kB) and NO other dependencies; this means **more productivity, less bloat**!
+• Lightweight (minified + gzip ~2.2kB) and NO other dependencies; this means **more productivity, less bloat**!
 
 ### I'm all about that! How do I start searching YouTube the right way?
 
@@ -104,24 +104,22 @@ console.log(currentPage[1]);
 **For async functions:**
 ```js
 (async () => {
+  const APIKEY = "12345"; // replace me
+  const QUERY = "Anything you want"; // replace me too
 
-    const APIKEY = "12345"; // replace me
-    const QUERY = "Anything you want"; // replace me too
+  const { YTSearcher } = require('ytsearcher');
+  const ytsearcher = new YTSearcher(APIKEY);
 
-    const { YTSearcher } = require('ytsearcher');
-    const ytsearcher = new YTSearcher(APIKEY);
+  // Type can be 'all', 'video', 'channel', 'playlist', or comma separated combination such as 'video,channel'
+  const searchResult = await ytsearcher.search(QUERY, { type: 'video' });
 
-    // Type can be 'all', 'video', 'channel', 'playlist', or comma separated combination such as 'video,channel'
-    const searchResult = await ytsearcher.search(QUERY, { type: 'video' });
+  const secondPage = await searchResult.nextPage();
+  // secondPage is same object as searchResult
 
-    const secondPage = await searchResult.nextPage();
-    // secondPage is same object as searchResult
+  const page = secondPage.currentPage;
+  const videoEntry = page[1];
 
-    const page = secondPage.currentPage;
-    const videoEntry = page[1];
-
-    console.log(videoEntry.url);
-
+  console.log(videoEntry.url);
 })();
 ```
 **For completely non-async functions:**
