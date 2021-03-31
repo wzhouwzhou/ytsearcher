@@ -6,7 +6,7 @@
         <a href="https://www.npmjs.com/package/ytsearcher"><img src="https://img.shields.io/npm/dt/ytsearcher.svg" alt="NPM downloads" /></a>
         <a href="https://david-dm.org/wzhouwzhou/ytsearcher"><img src="https://img.shields.io/david/wzhouwzhou/ytsearcher.svg" alt="Dependencies" /></a>
         <a href="https://snyk.io/test/npm/ytsearcher"><img src="https://snyk.io/test/npm/ytsearcher/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/npm/ytsearcher" style="max-width:100%;"></a>
-        <a href="https://bundlephobia.com/result?p=ytsearcher"><img src="https://badgen.net/bundlephobia/minzip/ytsearcher" alt="BundlePhobia" /></a>
+        <a href="https://bundlephobia.com/result?p=ytsearcher"><img src="https://badgen.net/bundlephobia/minzip/ytsearcher@latest" alt="BundlePhobia" /></a>
         <a href="https://paypal.me/wzhouwzhou"><img src="https://img.shields.io/badge/donate-paypal-009cde.svg" alt="Paypal" /></a>
     </p>
     <p>
@@ -19,21 +19,23 @@
 
 ### Installing via NPM.
 
-```$ npm i ytsearcher@latest```
+```
+$ npm i ytsearcher@latest
+```
 
 ### Why ytsearcher?
 
 • Modern and trustworthy (typings(!), promises, es6, up-to-date) with thousands of downloads.
 
-• Lightweight (minified + gzip ~2.5kB) and NO other dependencies; this means **more productivity, less bloat**!
+• Lightweight (minified + gzip ~2.2kB) and NO other dependencies; this means **more productivity, less bloat**!
 
 ### I'm all about that! How do I start searching YouTube the right way?
 
 **Creating the object:**
-
-    const { YTSearcher } = require('ytsearcher');
-    const searcher = new YTSearcher(apikey);
-
+```js
+const { YTSearcher } = require('ytsearcher');
+const searcher = new YTSearcher(apikey);
+```
 Notice the { } around YTSearcher. That is intentional!
 
 It's a good idea to get a key due to Google's rate limit on the API.
@@ -41,113 +43,113 @@ For details on how to obtain an API key and create a project visit [this link](h
 
 By default the api key will be irretrievable. This should be fine for most situations.
 To enable access to `searcher.key` create the object like so:
-
-    const searcher2 = new YTSearcher({
-      key: apiKey,
-      revealkey: true,
-    });
-
+```js
+const searcher2 = new YTSearcher({
+  key: apiKey,
+  revealkey: true,
+});
+```
 **To Perform Searches**
 
 This package interacts directly with google's api. The base url can be retrieved by doing
-```const { apiurl } = require('ytsearcher');```
+```js
+const { apiurl } = require('ytsearcher');
 
-    // result will be a YTSearch object.
-    let resultA = await searcher.search('A Search Query');
+// result will be a YTSearch object.
+let resultA = await searcher.search('A Search Query');
 
-    // You can customize your search with like so:
-    let resultB = await searcher.search('Another Query', searchOptions)
-
+// You can customize your search with like so:
+let resultB = await searcher.search('Another Query', searchOptions)
+```
 A list of options is available [here](https://developers.google.com/youtube/v3/docs/search/list)
 
 Or you can fetch the list via:
-```const { validOptions } = require('ytsearcher');``` which will return the array.
+```js
+const { validOptions } = require('ytsearcher');
+```
+which will return the array.
 
 **Examples**
+```js
+// For example, to grab only video results from a search query:
+let resultC = await searcher.search('A Third Query', { type: 'video' });
 
-    // For example, to grab only video results from a search query:
-    let resultC = await searcher.search('A Third Query', { type: 'video' });
+// This shortcut will log the first search result (in the active page).
+console.log(result.first);
 
-    // This shortcut will log the first search result (in the active page).
-    console.log(result.first);
-
-    // This will log the url of the first search result (in the active page).
-    console.log(result.first.url);
-
+// This will log the url of the first search result (in the active page).
+console.log(result.first.url);
+```
 ### Pagination
 
 **A YTSearch has a built in page flipper, which will update the properties of YTSearch, including search.first.**
+```js
+// These will return null when the last and first page have been hit (respectively).
+await result.nextPage();
+await result.prevPage();
 
-    // These will return null when the last and first page have been hit (respectively).
-    await result.nextPage();
-    await result.prevPage();
+// result.currentPage is an array of objects containing the current active page in the search object.
+const currentPage = result.currentPage
 
-    // result.currentPage is an array of objects containing the current active page in the search object.
-    const currentPage = result.currentPage
+// To print everything in the current page.
+console.log(currentPage);
 
-    // To print everything in the current page.
-    console.log(currentPage);
-
-    // You can also get individual elements from it like so:
-    console.log(currentPage.first());
-    console.log(currentPage.last());
-    console.log(currentPage[1]);
-
+// You can also get individual elements from it like so:
+console.log(currentPage.first());
+console.log(currentPage.last());
+console.log(currentPage[1]);
+```
 ### Summary example to get the url of the second result on the second page of a video-only search (assuming both the page and the result exist):
 
 **For async functions:**
+```js
+(async () => {
+  const APIKEY = "12345"; // replace me
+  const QUERY = "Anything you want"; // replace me too
 
-    (async () => {
+  const { YTSearcher } = require('ytsearcher');
+  const ytsearcher = new YTSearcher(APIKEY);
 
-    const APIKEY = "12345"; // replace me
-    const QUERY = "Anything you want"; // replace me too
+  // Type can be 'all', 'video', 'channel', 'playlist', or comma separated combination such as 'video,channel'
+  const searchResult = await ytsearcher.search(QUERY, { type: 'video' });
 
-    const { YTSearcher } = require('ytsearcher');
-    const ytsearcher = new YTSearcher(APIKEY);
+  const secondPage = await searchResult.nextPage();
+  // secondPage is same object as searchResult
 
-    // Type can be 'all', 'video', 'channel', 'playlist', or comma separated combination such as 'video,channel'
-    const searchResult = await ytsearcher.search(QUERY, { type: 'video' });
+  const page = secondPage.currentPage;
+  const videoEntry = page[1];
 
-    const secondPage = await searchResult.nextPage();
-    // secondPage is same object as searchResult
-
-    const page = secondPage.currentPage;
-    const videoEntry = page[1];
-
-    console.log(videoEntry.url);
-
-    })();
-
+  console.log(videoEntry.url);
+})();
+```
 **For completely non-async functions:**
+```js
+const APIKEY = "12345"; // replace me
+const QUERY = "Anything you want"; // replace me too
 
-    const APIKEY = "12345"; // replace me
-    const QUERY = "Anything you want"; // replace me too
+const { YTSearcher } = require('ytsearcher');
+const ytsearcher = new YTSearcher(APIKEY);
 
-    const { YTSearcher } = require('ytsearcher');
-    const ytsearcher = new YTSearcher(APIKEY);
+ytsearcher.search(QUERY, { type: 'video' }).then(searchResult => {
+  searchResult.nextPage()
+    .then(secondPage => {
+      // secondPage is same object as searchResult
 
-    ytsearcher.search(QUERY, { type: 'video' })
-    .then(searchResult => {
+      const page = secondPage.currentPage;
+      const videoEntry = page[1];
 
-      searchResult.nextPage()
-      .then(secondPage => {
-        // secondPage is same object as searchResult
-
-        const page = secondPage.currentPage;
-        const videoEntry = page[1];
-
-        console.log(videoEntry.url);
-      });
-    });
-
+      console.log(videoEntry.url);
+  });
+});
+```
 The Search Query can be anything, including a youtube link itself.
 
 Searches may error, and if an error code is available it will be in the error. A list of possible errors responses is available here: [https://developers.google.com/analytics/devguides/reporting/core/v3/errors](https://developers.google.com/analytics/devguides/reporting/core/v3/errors)
 
 Version:
-
-    const version = require('ytsearcher').version;
-
+```js
+const version = require('ytsearcher').version;
+```
 Full docs are available here: [http://ytsearcher.willyz.cf](https://ytsearcher.willyz.cf)
 
 Enjoy this package? Consider starring on [github](https://github.com/wzhouwzhou/ytsearcher) and checking out some of my other work:
